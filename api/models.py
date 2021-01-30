@@ -12,6 +12,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
     balance = Column(Integer, index=True, default=0)
+    is_active = Column(Boolean, default=True)
 
     sessions = relationship('Session', back_populates='owner')
 

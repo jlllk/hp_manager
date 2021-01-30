@@ -1,10 +1,12 @@
+import uvicorn
+
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
-from . import crud, models, schemas
-from .database import SessionLocal, engine
+from api import crud, models, schemas
+from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -44,3 +46,7 @@ def update_user_balance(user_id: int,
     if db_user is None:
         raise HTTPException(status_code=404, detail='User not found')
     return db_user
+
+
+if __name__ == '__main__':
+    uvicorn.run(app, host="localhost", port=8000)

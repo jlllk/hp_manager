@@ -2,8 +2,9 @@ from datetime import datetime
 
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DateTime
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
 
-from .database import Base
+Base = declarative_base()  # все ORM модели будут наследоваться от Base
 
 
 class User(Base):
@@ -12,7 +13,6 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
     balance = Column(Integer, index=True, default=0)
-    is_active = Column(Boolean, default=True)
 
     sessions = relationship('Session', back_populates='owner')
 

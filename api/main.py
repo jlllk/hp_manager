@@ -6,7 +6,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 
 from api import crud, models, schemas
-from database import SessionLocal, engine
+from database import SessionLocal
 
 
 app = FastAPI()

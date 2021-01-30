@@ -13,6 +13,19 @@ def get_user(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
+def update_balance(db: Session,
+                   user_id: int,
+                   update: schemas.Balance):
+    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+    if db_user:
+        if update.reset:
+            db_user.balance = 0
+        else:
+            db_user.balance = update.balance
+        db.commit()
+    return db_user
+
+
 def get_user_by_name(db: Session, name: str):
     return db.query(models.User).filter(models.User.name == name).first()
 

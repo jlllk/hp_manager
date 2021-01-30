@@ -2,7 +2,7 @@ from datetime import datetime
 
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class SessionCreate(BaseModel):
@@ -44,3 +44,8 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class Balance(BaseModel):
+    balance: int
+    reset: bool = Field(default=False)
